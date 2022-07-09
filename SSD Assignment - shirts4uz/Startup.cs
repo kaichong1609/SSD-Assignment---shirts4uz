@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using SSD_Assignment___shirts4uz.Models;
 using SSD_Assignment___shirts4uz.Data;
 
 namespace SSD_Assignment___shirts4uz
@@ -29,6 +32,41 @@ namespace SSD_Assignment___shirts4uz
 
             services.AddDbContext<SSD_Assignment___shirts4uzContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SSD_Assignment___shirts4uzContext")));
+
+            services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>()
+            .AddDefaultUI()
+            .AddEntityFrameworkStores<SSD_Assignment___shirts4uzContext>()
+            .AddDefaultTokenProviders();
+
+            services.AddMvc()
+                 .AddRazorPagesOptions(options =>
+                 {
+                     // options.Conventions.AllowAnonymousToFolder("/Shirts");
+                     // options.Conventions.AuthorizePage("/Shirts/Create");
+                     // options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
+                     options.Conventions.AuthorizeFolder("/Shirts");
+                 });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 1;
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+
+                // lockout ammount
+                options.Lockout.MaxFailedAccessAttempts = 7;
+                options.Lockout.AllowedForNewUsers = true;
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +85,8 @@ namespace SSD_Assignment___shirts4uz
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 
