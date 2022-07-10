@@ -33,7 +33,7 @@ namespace SSD_Assignment___shirts4uz
             services.AddDbContext<SSD_Assignment___shirts4uzContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SSD_Assignment___shirts4uzContext")));
 
-            services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
             .AddDefaultUI()
             .AddEntityFrameworkStores<SSD_Assignment___shirts4uzContext>()
             .AddDefaultTokenProviders();

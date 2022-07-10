@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SSD_Assignment___shirts4uz.Data
 {
-    public class SSD_Assignment___shirts4uzContext : IdentityDbContext<ApplicationUser>
+    public class SSD_Assignment___shirts4uzContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public SSD_Assignment___shirts4uzContext (DbContextOptions<SSD_Assignment___shirts4uzContext> options)
             : base(options)
