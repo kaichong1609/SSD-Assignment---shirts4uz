@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SSD_Assignment___shirts4uz.Data;
 using SSD_Assignment___shirts4uz.Models;
 
-namespace SSD_Assignment___shirts4uz.Pages.Shirts
+namespace SSD_Assignment___shirts4uz.Pages.Audit
 {
-    //[Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
@@ -23,12 +21,11 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
 
         public IActionResult OnGet()
         {
-
             return Page();
         }
 
         [BindProperty]
-        public Shirt Shirt { get; set; }
+        public AuditRecord AuditRecord { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -39,25 +36,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 return Page();
             }
 
-            _context.Shirt.Add(Shirt);
-            //await _context.SaveChangesAsync();
-            // Once a record is added, create an audit record
-            if (await _context.SaveChangesAsync() > 0)
-            {
-                // Create an auditrecord object
-                var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Add Movie Record";
-                auditrecord.DateTimeStamp = DateTime.Now;
-                auditrecord.KeyShirtFieldID = Shirt.ID;
-                // Get current logged-in user
-                var userID = User.Identity.Name.ToString();
-                auditrecord.Username = userID;
-                _context.AuditRecords.Add(auditrecord);
-                await _context.SaveChangesAsync();
-            }
-
-
-            _context.Shirt.Add(Shirt);
+            _context.AuditRecords.Add(AuditRecord);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

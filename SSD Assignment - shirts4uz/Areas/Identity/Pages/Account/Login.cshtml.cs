@@ -18,17 +18,20 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, 
-            ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+
+
+        public LoginModel(SignInManager<ApplicationUser> signInManager,
+       ILogger<LoginModel> logger, SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext
+       context)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -62,8 +65,6 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
-
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
@@ -86,6 +87,23 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
+                else
+
+                {
+                    // Login failed attempt -create an audit record
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Failed Login"
+                   ;
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeyShirtFieldID = 999;
+                    // 999 – dummy record
+                     auditrecord.Username = Input.Email;
+                    // save the email used for the failed login
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
+
+                }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
@@ -101,6 +119,7 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
                     return Page();
                 }
             }
+
 
             // If we got this far, something failed, redisplay form
             return Page();

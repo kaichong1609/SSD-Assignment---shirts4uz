@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SSD_Assignment___shirts4uz.Data;
 
 namespace SSD_Assignment___shirts4uz.Migrations
 {
     [DbContext(typeof(SSD_Assignment___shirts4uzContext))]
-    partial class SSD_Assignment___shirts4uzContextModelSnapshot : ModelSnapshot
+    [Migration("20220711121543_AddAudit")]
+    partial class AddAudit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -5,14 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 using SSD_Assignment___shirts4uz.Data;
 using SSD_Assignment___shirts4uz.Models;
 
-namespace SSD_Assignment___shirts4uz.Pages.Shirts
+namespace SSD_Assignment___shirts4uz.Pages.Audit
 {
-    //[Authorize(Roles = "Admin")]
-
     public class DeleteModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
@@ -23,7 +20,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         }
 
         [BindProperty]
-        public Shirt Shirt { get; set; }
+        public AuditRecord AuditRecord { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,9 +29,9 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 return NotFound();
             }
 
-            Shirt = await _context.Shirt.FirstOrDefaultAsync(m => m.ID == id);
+            AuditRecord = await _context.AuditRecords.FirstOrDefaultAsync(m => m.Audit_ID == id);
 
-            if (Shirt == null)
+            if (AuditRecord == null)
             {
                 return NotFound();
             }
@@ -48,24 +45,12 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 return NotFound();
             }
 
-            Shirt = await _context.Shirt.FindAsync(id);
+            AuditRecord = await _context.AuditRecords.FindAsync(id);
 
-            if (Shirt != null)
+            if (AuditRecord != null)
             {
-                _context.Shirt.Remove(Shirt);
-                // await _context.SaveChangesAsync();
-                // Once a record is deleted, create an audit record
-                if (await _context.SaveChangesAsync() > 0)
-                {
-                    var auditrecord = new AuditRecord();
-                    auditrecord.AuditActionType = "Delete Movie Record";
-                    auditrecord.DateTimeStamp = DateTime.Now;
-                    auditrecord.KeyShirtFieldID = Shirt.ID;
-                    var userID = User.Identity.Name.ToString();
-                    auditrecord.Username = userID;
-                    _context.AuditRecords.Add(auditrecord);
-                    await _context.SaveChangesAsync();
-                }
+                _context.AuditRecords.Remove(AuditRecord);
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSD_Assignment___shirts4uz.Data;
 using SSD_Assignment___shirts4uz.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment___shirts4uz.Pages.Shirts
 {
+    //[Authorize(Roles = "Admin, Users")]
     public class IndexModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
