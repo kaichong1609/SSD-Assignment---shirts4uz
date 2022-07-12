@@ -11,14 +11,16 @@ namespace SSD_Assignment___shirts4uz.Models
     {
         public int ID { get; set; }
 
-        [StringLength(60, MinimumLength = 3), Required]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
         public string Name { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(30), Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string."), Required]
         public string Color { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(5), Required]
         public string Size { get; set; }
+
+        [RegularExpression(@"^[A-Z]+[a-zA-Z 0-9\s\,\-\/]*$", ErrorMessage = "Please enter valid string."), Required]
         public string Description { get; set; }
 
         [Range(1, 100), DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
@@ -27,7 +29,7 @@ namespace SSD_Assignment___shirts4uz.Models
         [Display(Name = "List Date"), DataType(DataType.Date)]
         public DateTime ListDate { get; set; }
 
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), StringLength(30), Required]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z 0-9\s\,\-\/]*$", ErrorMessage = "Please enter valid string."), Required]
         public string Category { get; set; }
         //public string Review { get; set; }
     }

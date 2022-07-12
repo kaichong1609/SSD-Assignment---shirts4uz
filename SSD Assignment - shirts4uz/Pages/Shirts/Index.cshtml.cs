@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using SSD_Assignment___shirts4uz.Data;
 using SSD_Assignment___shirts4uz.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSD_Assignment___shirts4uz.Pages.Shirts
 {
@@ -24,6 +26,8 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
 
         public IList<Shirt> Shirt { get;set; }
         [BindProperty(SupportsGet = true)]
+
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
         public string SearchString { get; set; }
         public SelectList Categories { get; set; }
         [BindProperty(SupportsGet = true)]

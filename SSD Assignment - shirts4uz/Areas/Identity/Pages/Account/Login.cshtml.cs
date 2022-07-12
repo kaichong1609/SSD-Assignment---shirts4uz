@@ -47,10 +47,11 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Invalid Email or Password")]
             public string Email { get; set; }
 
             [Required]
+            [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Invalid Email or Password")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
