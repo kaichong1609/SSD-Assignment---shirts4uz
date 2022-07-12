@@ -31,7 +31,7 @@ namespace SSD_Assignment___shirts4uz.Models
                         Price = 21.90M,
                         ListDate = DateTime.Parse("2022-7-4"),
                         Category = "Mens Long Sleeve",
-                        Review = "4.2/5"
+                        //Review = "4.2/5"
                     },
 
                     new Shirt
@@ -43,7 +43,7 @@ namespace SSD_Assignment___shirts4uz.Models
                         Price = 29.90M,
                         ListDate = DateTime.Parse("2022-6-27"),
                         Category = "Womens Shirts and Blouses",
-                        Review = "4.1/5"
+                        //Review = "4.1/5"
 
                     },
 
@@ -56,7 +56,7 @@ namespace SSD_Assignment___shirts4uz.Models
                         Price = 33.90M,
                         ListDate = DateTime.Parse("2022-6-28"),
                         Category = "Womens Shirts and Blouses",
-                        Review = "3.9/5"
+                        //Review = "3.9/5"
                     },
 
                     new Shirt
@@ -68,7 +68,7 @@ namespace SSD_Assignment___shirts4uz.Models
                         Price = 29.90M,
                         ListDate = DateTime.Parse("2022-5-17"),
                         Category = "Womens Shirts and Blouses",
-                        Review = "4.6/5"
+                        //Review = "4.6/5"
                     }
                 );
                 context.SaveChanges();

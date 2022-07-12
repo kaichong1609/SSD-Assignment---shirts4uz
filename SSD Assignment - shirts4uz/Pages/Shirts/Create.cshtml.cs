@@ -46,7 +46,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             {
                 // Create an auditrecord object
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Add Movie Record";
+                auditrecord.AuditActionType = "Add Shirt Record";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeyShirtFieldID = Shirt.ID;
                 // Get current logged-in user
@@ -58,7 +58,6 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
 
 
             _context.Shirt.Add(Shirt);
-            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

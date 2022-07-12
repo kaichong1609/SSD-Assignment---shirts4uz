@@ -29,6 +29,6 @@ namespace SSD_Assignment___shirts4uz.Models
 
         [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$"), StringLength(30), Required]
         public string Category { get; set; }
-        public string Review { get; set; }
+        //public string Review { get; set; }
     }
 }
