@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SSD_Assignment___shirts4uz.Models;
+using SSD_Assignment___shirts4uz.Data;
 
 namespace SSD_Assignment___shirts4uz
 {
@@ -16,24 +17,27 @@ namespace SSD_Assignment___shirts4uz
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+            CreateDbIfNotExists(host);
+
+            host.Run();
+        }
+        private static void CreateDbIfNotExists(IHost host)
+        {
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
                 try
                 {
-                    SeedData.Initialize(services);
+                    var context = services.GetRequiredService<SSD_Assignment___shirts4uzContext>();
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred seeding the DB.");
+                    logger.LogError(ex, "An error occurred creating the DB.");
                 }
             }
-
-            host.Run();
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
