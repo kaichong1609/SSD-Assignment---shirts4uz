@@ -2,10 +2,10 @@
 @model SSD_Assignment___shirts4uz.Pages.Shirts.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Browse";
 }
 
-<h1>Index</h1>
+<h2>Browse from our collection of shirts</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -22,64 +22,21 @@
 </form>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Shirt[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shirt[0].Color)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shirt[0].Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shirt[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shirt[0].Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shirt[0].ListDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Shirt[0].Category)
-            </th>
-            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Shirt) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Size)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ListDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
+    <div class="card-deck">
+        @foreach (var shirt in Model.Shirt)
+        {
+            var photoPath = "~/img/" + (shirt.PhotoPath ?? "noimg.jpg");
+            <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
+                <div class="card-header" style="min-height:7rem;">
+                    <h3>@shirt.Name</h3>
+                </div>
+                <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true"/>
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary m-1" asp-page="./Edit" asp-route-id="@shirt.ID">Edit</a>
+                    <a class="btn btn-primary m-1" asp-page="./Details" asp-route-id="@shirt.ID">Details</a>
+                    <a class="btn btn-danger m-1" asp-page="./Delete" asp-route-id="@shirt.ID">Delete</a>
+                </div>
+            </div>
+        }
+    </div>
 </table>

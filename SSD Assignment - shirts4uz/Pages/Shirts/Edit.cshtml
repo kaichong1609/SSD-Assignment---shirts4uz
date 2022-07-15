@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var photoPath = "~/img/" + (Model.Shirt.PhotoPath ?? "noimg.jpg");
 }
 
 <h1>Edit</h1>
@@ -11,7 +12,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
+            <input hidden asp-for="Shirt.PhotoPath" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Shirt.ID" />
             <div class="form-group">
@@ -49,15 +51,25 @@
                 <input asp-for="Shirt.Category" class="form-control" />
                 <span asp-validation-for="Shirt.Category" class="text-danger"></span>
             </div>
-            <!--
             <div class="form-group">
-                <label asp-for="Shirt.Review" class="control-label"></label>
-                <input asp-for="Shirt.Review" class="form-control" />
-                <span asp-validation-for="Shirt.Review" class="text-danger"></span>
-            </div>-->
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group row col-sm-4 offset-4">
+                <img class="imageThumbnail" src="@photoPath" asp-append-version="true" style="max-width:30rem;" />
+            </div>
+
+            <!--
+    <div class="form-group">
+        <label asp-for="Shirt.Review" class="control-label"></label>
+        <input asp-for="Shirt.Review" class="form-control" />
+        <span asp-validation-for="Shirt.Review" class="text-danger"></span>
+    </div>-->
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>
@@ -68,4 +80,12 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(document).ready(function () {
+        $('.custom-file-input').on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).next('.custom-file-label').html(fileName);
+        });
+    });
+</script>
 }

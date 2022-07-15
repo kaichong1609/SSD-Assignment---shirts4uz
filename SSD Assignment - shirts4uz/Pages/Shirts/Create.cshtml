@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Shirt.Price" class="control-label"></label>
-                <input asp-for="Shirt.Price" class="form-control" type="number"/>
+                <input asp-for="Shirt.Price" class="form-control" type="number" />
                 <span asp-validation-for="Shirt.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -55,26 +55,32 @@
                 <input asp-for="Shirt.Category" class="form-control" />
                 <span asp-validation-for="Shirt.Category" class="text-danger"></span>
             </div>
+            <div class="form-group row">
+                <label asp-for="Shirt.PhotoPath" class="col-sm-2 col-form-label"></label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input type="file" asp-for="Shirt.PhotoPath" class="custom-file-input form-control" />
+                        <span asp-validation-for="Shirt.PhotoPath" class="text-danger"></span>
+                        <label class="custom-file-label">Click here to change photo</label>
+                    </div>
+                </div>
+            </div>
             <!--<div class="form-group">
-                <label asp-for="Shirt.Review" class="control-label"></label>
-                <input asp-for="Shirt.Review" class="form-control" />
-                <span asp-validation-for="Shirt.Review" class="text-danger"></span>
-            </div>-->
-            <div class="form-group">
-                <label for="myFile" class="control-label">Image</label>
-                <input type="file" id="myFile" name="filename" accept="image/*" />
-            </div>
+        <label asp-for="Shirt.Review" class="control-label"></label>
+        <input asp-for="Shirt.Review" class="form-control" />
+        <span asp-validation-for="Shirt.Review" class="text-danger"></span>
+    </div>-->
             <!-- add below remove above aft image field is added into database
-            <div class="form-group">
-                <label asp-for="Shirt.Image" class="control-label"></label>
-                <input asp-for="Shirt.Image" type="file" accept="image/*" />
-                <span asp-validation-for="Shirt.Image" class="text-danger"></span>
-            </div>
-                -->
+    <div class="form-group">
+        <label asp-for="Shirt.Image" class="control-label"></label>
+        <input asp-for="Shirt.Image" type="file" accept="image/*" />
+        <span asp-validation-for="Shirt.Image" class="text-danger"></span>
+    </div>
+        -->
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-            
+
         </form>
     </div>
 </div>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using SSD_Assignment___shirts4uz.Data;
 using SSD_Assignment___shirts4uz.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace SSD_Assignment___shirts4uz.Pages.Shirts
 {
@@ -23,6 +24,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         }
 
         [BindProperty]
+        public IFormFile Photo { get; set; }
         public Shirt Shirt { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)

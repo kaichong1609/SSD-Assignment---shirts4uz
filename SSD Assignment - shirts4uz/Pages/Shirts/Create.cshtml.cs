@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,19 +19,22 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
 
-        public CreateModel(SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext context)
+        public CreateModel(SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult OnGet()
         {
-
             return Page();
         }
 
         [BindProperty]
-        public Shirt Shirt { get; set; }
+        public IFormFile Photo { get; set; }
+        private readonly IWebHostEnvironment webHostEnvironment;
+        [BindProperty]
+        public Shirt Shirt { get; set; }    
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
