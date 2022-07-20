@@ -20,6 +20,8 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         }
 
         public Shirt Shirt { get; set; }
+        [BindProperty]
+        public Order Order { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -35,6 +37,41 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 return NotFound();
             }
             return Page();
+        }
+
+        
+
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://aka.ms/RazorPagesCRUD.
+        public async Task<IActionResult> OnPostAsync()
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _context.Order.Add(Order);
+            await _context.SaveChangesAsync();
+            // Once a record is added, create an audit record
+            /*if (await _context.SaveChangesAsync() > 0)
+            {
+                // Create an auditrecord object
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Add Order Record";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyOrderFieldID = Order.ID;
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
+            }*/
+
+
+            _context.Order.Add(Order);
+
+            return RedirectToPage("./Index");
         }
     }
 }

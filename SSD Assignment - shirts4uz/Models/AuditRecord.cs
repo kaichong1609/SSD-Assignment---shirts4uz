@@ -24,6 +24,6 @@ namespace SSD_Assignment___shirts4uz.Models
         //Time when the event occurred
         [Display(Name = "Shirt Record ID ")]
         public int KeyShirtFieldID { get; set; }
-        //Store the ID of movie record that is affected
+        //Store the ID of shirt record that is affected
     }
 }
