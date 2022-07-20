@@ -32,6 +32,7 @@
                 </div>
                 <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true"/>
                 <div class="card-footer text-center">
+                    <a class="btn btn-primary m-1" asp-page="./Buy" asp-route-id="@shirt.ID">Buy</a>
                     <a class="btn btn-primary m-1" asp-page="./Edit" asp-route-id="@shirt.ID">Edit</a>
                     <a class="btn btn-primary m-1" asp-page="./Details" asp-route-id="@shirt.ID">Details</a>
                     <a class="btn btn-danger m-1" asp-page="./Delete" asp-route-id="@shirt.ID">Delete</a>

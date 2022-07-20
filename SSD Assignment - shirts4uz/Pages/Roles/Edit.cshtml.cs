@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment___shirts4uz.Pages.Roles
 {
-    [Authorize(Roles = "Admin, Users")]
+    //[Authorize(Roles = "Admin, Users")]
     public class EditModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
