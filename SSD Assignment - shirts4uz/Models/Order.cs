@@ -19,22 +19,27 @@ namespace SSD_Assignment___shirts4uz.Models
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
         public string NameOnCard { get; set; }
 
-        [RegularExpression(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Please enter a valid email" ), Required]
+        [StringLength(320, MinimumLength = 5, ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Please enter a valid email" )]
         public string Email { get; set; }
 
-        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid string."), Required]
+        [StringLength(300, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid string.")]
         public string Address { get; set; }
 
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string."), Required]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
         public string City { get; set; }
 
-        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string."), Required]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
         public string State { get; set; }
 
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression(@"\d{1,30}]*", ErrorMessage = "Please enter valid string."), Required]
         public int PostalCode { get; set; }
 
-        [RegularExpression(@"\d{16}]*", ErrorMessage = "Please enter valid string."), Required]
+        [StringLength(30, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression(@"\d{16}]*", ErrorMessage = "Please enter valid string.")]
         public string CCNum { get; set; }
 
         [RegularExpression(@"\d{2}]*", ErrorMessage = "Please enter valid number."), Required]
