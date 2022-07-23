@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace SSD_Assignment___shirts4uz.Pages.Shirts
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Product Lister")]
 
     public class DeleteModel : PageModel
     {

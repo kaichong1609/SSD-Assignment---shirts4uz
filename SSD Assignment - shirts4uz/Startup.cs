@@ -77,6 +77,7 @@ namespace SSD_Assignment___shirts4uz
                 options.ExpireTimeSpan = TimeSpan.FromSeconds(600);
                 options.SlidingExpiration = true;
             });
+            services.AddAuthorization();
 
         }
 

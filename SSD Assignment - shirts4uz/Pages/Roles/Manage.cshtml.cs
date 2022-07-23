@@ -13,7 +13,7 @@ using System;
 
 namespace SSD_Assignment___shirts4uz.Pages.Roles
 {
-    //[Authorize(Roles = "Owner")] add this in after we are done with testing roles
+    [Authorize]
     public class ManageModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
