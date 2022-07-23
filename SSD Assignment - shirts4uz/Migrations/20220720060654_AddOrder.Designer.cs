@@ -270,7 +270,7 @@ namespace SSD_Assignment___shirts4uz.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CCNum")
-                        .HasColumnType("int");
+                        .HasColumnType("string");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");

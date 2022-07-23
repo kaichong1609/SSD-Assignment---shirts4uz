@@ -19,7 +19,7 @@ namespace SSD_Assignment___shirts4uz.Migrations
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
                     PostalCode = table.Column<int>(nullable: false),
-                    CCNum = table.Column<int>(nullable: false),
+                    CCNum = table.Column<string>(nullable: false),
                     ExpMonth = table.Column<int>(nullable: false),
                     ExpYear = table.Column<int>(nullable: false)
                 },
