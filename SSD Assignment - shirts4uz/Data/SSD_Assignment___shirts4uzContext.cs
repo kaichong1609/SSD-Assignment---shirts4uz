@@ -29,5 +29,6 @@ namespace SSD_Assignment___shirts4uz.Data
         public DbSet<SSD_Assignment___shirts4uz.Models.Shirt> Shirt { get; set; }
         public DbSet<SSD_Assignment___shirts4uz.Models.AuditRecord> AuditRecords { get; set; }
         public DbSet<SSD_Assignment___shirts4uz.Models.Order> Order { get; set; }
+        public DbSet<SSD_Assignment___shirts4uz.Models.Feedback> Feedback { get; set; }
     }
 }

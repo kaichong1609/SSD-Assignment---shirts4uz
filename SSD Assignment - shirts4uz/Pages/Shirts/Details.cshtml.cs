@@ -21,7 +21,11 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             _context = context;
         }
 
+        [BindProperty]
         public Shirt Shirt { get; set; }
+
+        [BindProperty]
+        public Feedback Feedback { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -37,6 +41,35 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 return NotFound();
             }
             return Page();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            Feedback.ShirtID = Shirt.ID.ToString();
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            _context.Feedback.Add(Feedback);
+            // Once a record is added, create an audit record
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                // Create an auditrecord object
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Add Feedback Record";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyShirtFieldID = Feedback.ID.ToString();
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
+            }
+
+
+            _context.Feedback.Add(Feedback);
+
+            return RedirectToPage("./Index");
         }
     }
 }
