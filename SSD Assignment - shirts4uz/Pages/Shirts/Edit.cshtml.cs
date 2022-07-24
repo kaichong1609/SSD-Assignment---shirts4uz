@@ -70,7 +70,17 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             _context.Attach(Shirt).State = EntityState.Modified;
             try
             {
-                await _context.SaveChangesAsync();
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Edit Movie Record";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeyShirtFieldID = Shirt.ID.ToString();
+                    var userID = User.Identity.Name.ToString();
+                    auditrecord.Username = userID;
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
+                }
             }
             catch (DbUpdateConcurrencyException)
             {

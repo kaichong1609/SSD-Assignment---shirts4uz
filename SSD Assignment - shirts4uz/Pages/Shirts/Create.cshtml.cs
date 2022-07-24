@@ -54,7 +54,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 var auditrecord = new AuditRecord();
                 auditrecord.AuditActionType = "Add Shirt Record";
                 auditrecord.DateTimeStamp = DateTime.Now;
-                auditrecord.KeyShirtFieldID = Shirt.ID;
+                auditrecord.KeyShirtFieldID = Shirt.ID.ToString();
                 // Get current logged-in user
                 var userID = User.Identity.Name.ToString();
                 auditrecord.Username = userID;

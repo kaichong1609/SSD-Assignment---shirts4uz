@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using SSD_Assignment___shirts4uz.Models;
+using SSD_Assignment___shirts4uz.Data;
 using Microsoft.AspNetCore.Authorization;
 
 
@@ -15,9 +16,11 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
     public class EditModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
-        public EditModel(RoleManager<ApplicationRole> roleManager)
+        private readonly SSD_Assignment___shirts4uzContext _context;
+        public EditModel(RoleManager<ApplicationRole> roleManager, SSD_Assignment___shirts4uzContext context)
         {
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -48,6 +51,15 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
             IdentityResult roleRuslt = await _roleManager.UpdateAsync(appRole);
             if (roleRuslt.Succeeded)
             {
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Edit existing role";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyShirtFieldID = ApplicationRole.Id;
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
             return RedirectToPage("./Index");

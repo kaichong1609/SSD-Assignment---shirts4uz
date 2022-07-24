@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using SSD_Assignment___shirts4uz.Models;
+using SSD_Assignment___shirts4uz.Data;
 using Microsoft.AspNetCore.Authorization;
 
 
@@ -15,8 +16,10 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
     public class CreateModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
-        public CreateModel(RoleManager<ApplicationRole> roleManager)
+        private readonly SSD_Assignment___shirts4uzContext _context;
+        public CreateModel(RoleManager<ApplicationRole> roleManager, SSD_Assignment___shirts4uzContext context)
         {
+            _context = context;
             _roleManager = roleManager;
         }
         public IActionResult OnGet()
@@ -32,9 +35,21 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
                 return Page();
             }
             ApplicationRole.CreatedDate = DateTime.UtcNow;
-            ApplicationRole.IPAddress =
-           Request.HttpContext.Connection.RemoteIpAddress.ToString();
+            ApplicationRole.IPAddress = Request.HttpContext.Connection.RemoteIpAddress.ToString();
             IdentityResult roleRuslt = await _roleManager.CreateAsync(ApplicationRole);
+            if (roleRuslt.Succeeded)
+            {
+                // Create an auditrecord object
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "Add new role";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyShirtFieldID = ApplicationRole.Id;
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToPage("Index");
         }
     }

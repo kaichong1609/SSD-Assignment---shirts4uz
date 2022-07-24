@@ -60,9 +60,9 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     var auditrecord = new AuditRecord();
-                    auditrecord.AuditActionType = "Delete Movie Record";
+                    auditrecord.AuditActionType = "Delete Shirt Record";
                     auditrecord.DateTimeStamp = DateTime.Now;
-                    auditrecord.KeyShirtFieldID = Shirt.ID;
+                    auditrecord.KeyShirtFieldID = Shirt.ID.ToString();
                     var userID = User.Identity.Name.ToString();
                     auditrecord.Username = userID;
                     _context.AuditRecords.Add(auditrecord);

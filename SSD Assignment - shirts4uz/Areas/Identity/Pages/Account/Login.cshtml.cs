@@ -96,7 +96,7 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
                     auditrecord.AuditActionType = "Failed Login"
                    ;
                     auditrecord.DateTimeStamp = DateTime.Now;
-                    auditrecord.KeyShirtFieldID = 999;
+                    auditrecord.KeyShirtFieldID = "999";
                     // 999 – dummy record
                      auditrecord.Username = Input.Email;
                     // save the email used for the failed login
