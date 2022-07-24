@@ -21,6 +21,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             _context = context;
         }
 
+        [BindProperty]
         public Shirt Shirt { get; set; }
         [BindProperty]
         public Order Order { get; set; }
@@ -47,7 +48,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            
+            Order.ShirtID = Shirt.ID.ToString();
             if (!ModelState.IsValid)
             {
                 return Page();

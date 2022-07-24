@@ -298,6 +298,9 @@ namespace SSD_Assignment___shirts4uz.Migrations
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ShirtID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.ToTable("Order");

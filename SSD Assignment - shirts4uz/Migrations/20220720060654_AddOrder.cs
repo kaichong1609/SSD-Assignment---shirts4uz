@@ -21,7 +21,8 @@ namespace SSD_Assignment___shirts4uz.Migrations
                     PostalCode = table.Column<int>(nullable: false),
                     CCNum = table.Column<string>(nullable: false),
                     ExpMonth = table.Column<int>(nullable: false),
-                    ExpYear = table.Column<int>(nullable: false)
+                    ExpYear = table.Column<int>(nullable: false),
+                    ShirtID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

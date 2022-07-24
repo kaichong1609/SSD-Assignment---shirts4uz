@@ -42,11 +42,13 @@ namespace SSD_Assignment___shirts4uz.Models
         [RegularExpression(@"\d{16}]*", ErrorMessage = "Please enter valid string.")]
         public string CCNum { get; set; }
 
-        [RegularExpression(@"\d{2}]*", ErrorMessage = "Please enter valid number."), Required]
+        [Range(1,12, ErrorMessage = "Please enter valid number."), RegularExpression(@"\d{1,2}]*", ErrorMessage = "Please enter valid number."), Required]
         public int ExpMonth { get; set; }
 
-        [RegularExpression(@"\d{4}]*", ErrorMessage = "Please enter valid year."), Required]
+        [Range(2022,3000, ErrorMessage = "Please enter valid year"), RegularExpression(@"\d{4}]*", ErrorMessage = "Please enter valid year."), Required]
         public int ExpYear { get; set; }
+
+        public string ShirtID { get; set; }
 
     }
 }

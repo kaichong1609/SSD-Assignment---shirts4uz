@@ -97,9 +97,9 @@ namespace SSD_Assignment___shirts4uz
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseAuthentication();
-
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
