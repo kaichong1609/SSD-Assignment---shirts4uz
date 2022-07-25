@@ -3,8 +3,83 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<link rel="stylesheet" href="~/css/styles.css">
 
 <div class="text-center">
-    <h1 class="display-4">shirts4uz</h1>
-    <p>Modern People require Modern Clothing.</p>
+    <header class="header" id="header">
+
+        <a id="Heading"></a>
+        <div class="head flex">
+            <h1 class="display-4">shirts4uz</h1>
+            <p>Browse from our collection of high quality and affordable clothing.</p>
+        </div>
+    </header>
+</div>
+<div class="container-fluid">
+    <section class="shirts">
+        <div class="container-faci">
+            <input type="radio" name="dot" id="one">
+            <input type="radio" name="dot" id="two">
+            <div class="main-card">
+                <div class="cards">
+                    <div class="card">
+                        <div class="content">
+                            <div class="img-fluid">
+                                <div class="img">
+                                    <img src="~/img/tshirtdress.webp" />
+                                </div>
+                            </div>
+                            <div class="details">
+                                <div class="name">Womens Dresses</div>
+                                <div class="job">From T-Shirt dresses to flannel dresses, browse our collections of Womens dresses now</div>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Shirts/Index"><u>View More</u></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="img">
+                                <img src="~/img/lightshorts.webp" />
+                            </div>
+                            <div class="details">
+                                <div class="name">Mens Shorts</div>
+                                <div class="job">Browse our essential collection of Mens shorts now, ranging from chino shorts to light and relaxed shorts</div>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Shirts/Index"><u>View More</u></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="content">
+                            <div class="img">
+                                <img src="~/img/chino.webp" />
+                            </div>
+                            <div class="details">
+                                <div class="name">Mens Pants</div>
+                                <div class="job">Take a look at our collection of pants curated for Men at an affordable price</div>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Shirts/Index"><u>View More</u></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cards">
+                    <div class="card">
+                        <div class="content">
+                            <div class="img">
+                                <img src="~/img/pulloverhoodie.webp"/>
+                            </div>
+                            <div class="details">
+                                <div class="name">Mens Sweaters</div>
+                                <div class="job">Our collection of sweaters, made with high quality and made for comfort</div>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Shirts/Index"><u>View More</u></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="button">
+                <label for="one" class=" active one"></label>
+                <label for="two" class="two"></label>
+            </div>
+        </div>
+    </section>
 </div>
