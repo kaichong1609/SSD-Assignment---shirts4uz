@@ -36,6 +36,27 @@
                                 <a class="dropdown-item" asp-area="" asp-page="/Shirts/Index">Womens Dress</a>
                             </div>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Roles/Index">Manage Roles</a>
+                                </li>
+                            }
+                            if (User.IsInRole("Auditor"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Audit/Index">View Audit Logs</a>
+                                </li>
+                            }
+                            if (User.IsInRole("Product Lister"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Shirts/Create">Add a new shirt</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
                 <partial name="_LoginPartial" />

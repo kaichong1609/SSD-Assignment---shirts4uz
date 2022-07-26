@@ -7,9 +7,16 @@
 
 <h2>Browse from our collection of shirts</h2>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Product Lister"))
+    {
+        <p>
+            <a asp-page="Create">Create New</a>
+        </p>
+    }
+}
+
 
 <form>
     <p>
@@ -17,7 +24,7 @@
             <option value="">All</option>
         </select>
         Title: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter"/>
+        <input type="submit" value="Filter" />
     </p>
 </form>
 
@@ -30,12 +37,18 @@
                 <div class="card-header" style="min-height:7rem;">
                     <h3>@shirt.Name</h3>
                 </div>
-                <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true"/>
+                <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" />
                 <div class="card-footer text-center">
                     <a class="btn btn-primary m-1" asp-page="./Buy" asp-route-id="@shirt.ID">Buy</a>
-                    <a class="btn btn-primary m-1" asp-page="./Edit" asp-route-id="@shirt.ID">Edit</a>
                     <a class="btn btn-primary m-1" asp-page="./Details" asp-route-id="@shirt.ID">Details</a>
-                    <a class="btn btn-danger m-1" asp-page="./Delete" asp-route-id="@shirt.ID">Delete</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Product Lister"))
+                        {
+                            <a class="btn btn-primary m-1" asp-page="./Edit" asp-route-id="@shirt.ID">Edit</a>
+                            <a class="btn btn-danger m-1" asp-page="./Delete" asp-route-id="@shirt.ID">Delete</a>
+                        }
+                    }
                 </div>
             </div>
         }
