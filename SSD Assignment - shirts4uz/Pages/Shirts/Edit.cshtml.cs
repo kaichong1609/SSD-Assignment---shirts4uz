@@ -54,46 +54,53 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            var emptyShirt = new Shirt();
+            if (await TryUpdateModelAsync<Shirt>(emptyShirt, "shirt", s => s.Name, s => s.Color,
+    s => s.Size, s => s.Description, s => s.Price
+    , s => s.ListDate, s => s.Category, s => s.PhotoPath))
             {
-                return Page();
-            }
-            if (Image != null)
-            {
-                var fileName = GenerateUniqueName(this.Image.FileName);
-                var uploadsPath = Path.Combine(_webHostEnvironment.WebRootPath, "img");
-                var filePath = Path.Combine(uploadsPath, fileName);
-                Image.CopyTo(new FileStream(filePath, FileMode.Create));
-                Shirt.PhotoPath = fileName;
-            }
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+                if (Image != null)
+                {
+                    var fileName = GenerateUniqueName(this.Image.FileName);
+                    var uploadsPath = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+                    var filePath = Path.Combine(uploadsPath, fileName);
+                    Image.CopyTo(new FileStream(filePath, FileMode.Create));
+                    Shirt.PhotoPath = fileName;
+                }
 
-            _context.Attach(Shirt).State = EntityState.Modified;
-            try
-            {
-                if (await _context.SaveChangesAsync() > 0)
+                _context.Attach(Shirt).State = EntityState.Modified;
+                try
                 {
-                    var auditrecord = new AuditRecord();
-                    auditrecord.AuditActionType = "Edit Movie Record";
-                    auditrecord.DateTimeStamp = DateTime.Now;
-                    auditrecord.KeyShirtFieldID = Shirt.ID.ToString();
-                    var userID = User.Identity.Name.ToString();
-                    auditrecord.Username = userID;
-                    _context.AuditRecords.Add(auditrecord);
-                    await _context.SaveChangesAsync();
+                    if (await _context.SaveChangesAsync() > 0)
+                    {
+                        var auditrecord = new AuditRecord();
+                        auditrecord.AuditActionType = "Edit Movie Record";
+                        auditrecord.DateTimeStamp = DateTime.Now;
+                        auditrecord.KeyShirtFieldID = Shirt.ID.ToString();
+                        var userID = User.Identity.Name.ToString();
+                        auditrecord.Username = userID;
+                        _context.AuditRecords.Add(auditrecord);
+                        await _context.SaveChangesAsync();
+                    }
                 }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ShirtExists(Shirt.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToPage("./Index");
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ShirtExists(Shirt.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-            return RedirectToPage("./Index");
+            return Page();
         }
 
         private bool ShirtExists(int id)

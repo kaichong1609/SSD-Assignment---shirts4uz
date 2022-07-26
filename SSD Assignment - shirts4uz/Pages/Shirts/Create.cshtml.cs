@@ -41,7 +41,8 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         public async Task<IActionResult> OnPostAsync()
         {
             var emptyShirt = new Shirt();
-            if (await TryUpdateModelAsync<Shirt>(emptyShirt, "shirt", s => s.Name, s => s.Color, s => s.Size, s => s.Description, s => s.Price
+            if (await TryUpdateModelAsync<Shirt>(emptyShirt, "shirt", s => s.Name, s => s.Color, 
+                s => s.Size, s => s.Description, s => s.Price
                 , s => s.ListDate, s => s.Category, s => s.PhotoPath))
             {
                 if (!ModelState.IsValid)
