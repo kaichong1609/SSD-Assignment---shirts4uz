@@ -30,10 +30,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" asp-area="">Browse by category</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-page="/Shirts/Index">Mens Pants</a>
-                                <a class="dropdown-item" asp-area="" asp-page="/Shirts/Index">Mens Sweaters</a>
-                                <a class="dropdown-item" asp-area="" asp-page="/Shirts/Index">Womens Pants</a>
-                                <a class="dropdown-item" asp-area="" asp-page="/Shirts/Index">Womens Dress</a>
+                                <a class="dropdown-item" asp-route-ShirtCategory="Mens Pants" asp-page="/Shirts/Index">Mens Pants</a>
+                                <a class="dropdown-item" asp-route-ShirtCategory="Mens Sweaters" asp-page="/Shirts/Index">Mens Sweaters</a>
+                                <a class="dropdown-item" asp-route-ShirtCategory="Womens Pants" asp-page="/Shirts/Index">Womens Pants</a>
+                                <a class="dropdown-item" asp-route-ShirtCategory="Womens Dress" asp-page="/Shirts/Index">Womens Dress</a>
                             </div>
                         </li>
                         @if (User.Identity.IsAuthenticated)
