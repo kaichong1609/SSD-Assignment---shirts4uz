@@ -38,8 +38,7 @@ namespace SSD_Assignment___shirts4uz.Models
         [RegularExpression(@"\d{1,30}]*", ErrorMessage = "Please enter valid string."), Required]
         public int PostalCode { get; set; }
 
-        [StringLength(30, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
-        [RegularExpression(@"\d{16}]*", ErrorMessage = "Please enter valid string.")]
+        [StringLength(300, MinimumLength = 13, ErrorMessage = "Please enter valid string."), Required]
         public string CCNum { get; set; }
 
         [Range(1,12, ErrorMessage = "Please enter valid number."), RegularExpression(@"\d{1,2}]*", ErrorMessage = "Please enter valid number."), Required]

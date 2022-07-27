@@ -14,7 +14,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSD_Assignment___shirts4uz.Pages.Shirts
 {
-    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
