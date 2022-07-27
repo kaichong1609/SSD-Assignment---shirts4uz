@@ -43,6 +43,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         public async Task<IActionResult> OnPostAsync()
         {
             Feedback.ShirtID = Shirt.ID.ToString();
+            Feedback.FullName = User.Identity.Name.ToString();
             if (!ModelState.IsValid)
             {
                 return Page();

@@ -52,7 +52,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
             if (roleRuslt.Succeeded)
             {
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Edit existing role";
+                auditrecord.AuditActionType = "Exisitng Role Name changed to: " + appRole.Name;
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeyShirtFieldID = ApplicationRole.Id;
                 // Get current logged-in user
