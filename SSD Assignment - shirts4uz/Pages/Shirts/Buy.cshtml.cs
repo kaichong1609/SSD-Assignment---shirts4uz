@@ -78,10 +78,11 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             _context.Order.Add(Order);
             // Once a record is added, create an audit record
             if (await _context.SaveChangesAsync() > 0)
-            {   
+            {
                 // Create an auditrecord object
+                TempData["message"] = "Purchase Successful";
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Add Order Record";
+                auditrecord.AuditActionType = "New Order Record";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeyShirtFieldID = Order.ID.ToString();
                 // Get current logged-in user

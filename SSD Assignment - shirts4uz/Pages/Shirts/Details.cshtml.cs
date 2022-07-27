@@ -56,7 +56,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             {
                 // Create an auditrecord object
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Add Feedback Record";
+                auditrecord.AuditActionType = "New Feedback Record";
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeyShirtFieldID = Feedback.ID.ToString();
                 // Get current logged-in user

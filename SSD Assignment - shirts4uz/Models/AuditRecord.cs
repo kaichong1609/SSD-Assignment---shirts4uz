@@ -26,7 +26,7 @@ namespace SSD_Assignment___shirts4uz.Models
         [DataType(DataType.DateTime), Required]
         public DateTime DateTimeStamp { get; set; }
         //Time when the event occurred
-        [Display(Name = "Shirt Record ID ")]
+        [Display(Name = "Relevant Record ID ")]
         [RegularExpression(@"\d{1,30}]*", ErrorMessage = "Please enter valid string."), Required]
         public string KeyShirtFieldID { get; set; }
         //Store the ID of shirt record that is affected

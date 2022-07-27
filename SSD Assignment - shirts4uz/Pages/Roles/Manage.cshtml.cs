@@ -79,6 +79,16 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
             if (roleResult.Succeeded)
             {
                 TempData["message"] = "Role added to this user successfully";
+                // Create an auditrecord object
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = AppRole.Name + " assigned to " + AppUser.Email;
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyShirtFieldID = AppRole.Id;
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
                 return RedirectToPage("Manage");
             }
             return RedirectToPage("Manage");
@@ -96,6 +106,15 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
             {
                 await _userManager.RemoveFromRoleAsync(user, delrolename);
                 TempData["message"] = "Role removed from this user successfully";
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = delrolename + " unassigned from " + delusername;
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyShirtFieldID = "999";
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
             }
             return RedirectToPage("Manage");
         }

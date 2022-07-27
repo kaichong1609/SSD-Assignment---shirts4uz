@@ -40,12 +40,13 @@ namespace SSD_Assignment___shirts4uz.Pages.Roles
             if (roleRuslt.Succeeded)
             {
                 // Create an auditrecord object
+                var userID = User.Identity.Name.ToString();
                 var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "Add new role";
+                auditrecord.AuditActionType = "Created role: " + ApplicationRole.Name;
                 auditrecord.DateTimeStamp = DateTime.Now;
                 auditrecord.KeyShirtFieldID = ApplicationRole.Id;
                 // Get current logged-in user
-                var userID = User.Identity.Name.ToString();
+               
                 auditrecord.Username = userID;
                 _context.AuditRecords.Add(auditrecord);
                 await _context.SaveChangesAsync();
