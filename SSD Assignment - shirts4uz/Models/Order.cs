@@ -11,9 +11,9 @@ namespace SSD_Assignment___shirts4uz.Models
     {
         public int ID { get; set; }
 
-        [StringLength(60, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
+        /*[StringLength(60, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
-        public string FullName { get; set; }
+        public string FullName { get; set; }*/
 
         [StringLength(60, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
@@ -24,7 +24,7 @@ namespace SSD_Assignment___shirts4uz.Models
         public string Email { get; set; }
 
         [StringLength(300, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
-        [RegularExpression("^[a-zA-Z0-9 ]*$", ErrorMessage = "Please enter valid string.")]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z 0-9\s\,\-\/\#]*$", ErrorMessage = "Please enter valid string.")]
         public string Address { get; set; }
 
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
@@ -35,19 +35,28 @@ namespace SSD_Assignment___shirts4uz.Models
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
         public string State { get; set; }
 
+        [Display(Name = "Postal Code")]
         [RegularExpression(@"\d{1,30}]*", ErrorMessage = "Please enter valid string."), Required]
         public int PostalCode { get; set; }
 
-        [StringLength(300, MinimumLength = 13, ErrorMessage = "Please enter valid string."), Required]
+        /*[StringLength(300, MinimumLength = 13, ErrorMessage = "Please enter valid string."), Required]
         public string CCNum { get; set; }
 
         [Range(1,12, ErrorMessage = "Please enter valid number."), RegularExpression(@"\d{1,2}]*", ErrorMessage = "Please enter valid number."), Required]
         public int ExpMonth { get; set; }
 
         [Range(2022,3000, ErrorMessage = "Please enter valid year"), RegularExpression(@"\d{4}]*", ErrorMessage = "Please enter valid year."), Required]
-        public int ExpYear { get; set; }
+        public int ExpYear { get; set; }*/
+
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public decimal Price { get; set; }
+
+        [Display(Name = "Shirt Name")]
+        public string ShirtName { get; set; }
 
         public string ShirtID { get; set; }
+
+        public string UserEmail { get; set; }
 
     }
 }

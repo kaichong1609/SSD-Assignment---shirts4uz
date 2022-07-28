@@ -272,7 +272,8 @@ namespace SSD_Assignment___shirts4uz.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(300)")
+                        .HasMaxLength(300);
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(max)");
@@ -300,11 +301,6 @@ namespace SSD_Assignment___shirts4uz.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasMaxLength(300);
 
-                    b.Property<string>("CCNum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(30)")
-                        .HasMaxLength(30);
-
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
@@ -315,17 +311,6 @@ namespace SSD_Assignment___shirts4uz.Migrations
                         .HasColumnType("nvarchar(320)")
                         .HasMaxLength(320);
 
-                    b.Property<int>("ExpMonth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExpYear")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(60)")
-                        .HasMaxLength(60);
-
                     b.Property<string>("NameOnCard")
                         .IsRequired()
                         .HasColumnType("nvarchar(60)")
@@ -334,13 +319,22 @@ namespace SSD_Assignment___shirts4uz.Migrations
                     b.Property<int>("PostalCode")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
                     b.Property<string>("ShirtID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShirtName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
+
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

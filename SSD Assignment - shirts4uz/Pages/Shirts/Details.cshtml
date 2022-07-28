@@ -105,6 +105,48 @@
         </div>
     </div>
 </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedbackList[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedbackList[0].Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedbackList[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.FeedbackList)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Product Lister") || User.Identity.Name == item.FullName)
+                {
+                    <td>
+                        <a asp-page="../Feedbacks/Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-page="../Feedbacks/Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                }
+            }
+        </tr>
+        }
+    </tbody>
+</table>
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>

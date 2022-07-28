@@ -25,8 +25,11 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         [BindProperty]
         public Feedback Feedback { get; set; }
 
+        public IList<Feedback> FeedbackList { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            FeedbackList = await _context.Feedback.ToListAsync();
             if (id == null)
             {
                 return NotFound();
@@ -68,7 +71,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
 
             _context.Feedback.Add(Feedback);
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details");
         }
     }
 }

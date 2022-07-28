@@ -23,7 +23,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             _context = context;
         }
 
-        public string Hash(string ccnum)
+        /*public string Hash(string ccnum)
         {
             byte[] salt = new byte[128 / 8];
             using (var rngCsp = new RNGCryptoServiceProvider())
@@ -40,7 +40,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 numBytesRequested: 256 / 8));
             return hashed;
 
-        }
+        }*/
 
         [BindProperty]
         public Shirt Shirt { get; set; }
@@ -63,18 +63,22 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             return Page();
         }
 
-        
+
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
+        
         public async Task<IActionResult> OnPostAsync()
         {
+            Order.Price = Shirt.Price;
+            Order.ShirtName = Shirt.Name.ToString();
+            Order.UserEmail = User.Identity.Name.ToString();
             Order.ShirtID = Shirt.ID.ToString();
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            Order.CCNum = Hash(Order.CCNum);
+            //Order.CCNum = Hash(Order.CCNum);
             _context.Order.Add(Order);
             // Once a record is added, create an audit record
             if (await _context.SaveChangesAsync() > 0)
@@ -96,5 +100,6 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             
             return RedirectToPage("./Index");
         }
+        
     }
 }

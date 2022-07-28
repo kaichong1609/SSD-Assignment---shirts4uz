@@ -35,7 +35,7 @@
 
 <table class="table">
     <div class="card-deck">
-        @foreach (var shirt in Model.Shirt)
+        @foreach (var shirt in Model.ShirtList)
         {
             var photoPath = "~/img/" + (shirt.PhotoPath ?? "noimg.jpg");
             <div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
@@ -46,6 +46,19 @@
                 <div class="card-footer text-center">
                     <a class="btn btn-primary m-1" asp-page="./Buy" asp-route-id="@shirt.ID">Buy</a>
                     <a class="btn btn-primary m-1" asp-page="./Details" asp-route-id="@shirt.ID">Details</a>
+                    <!--<form>
+                        <input hidden asp-for="Shirt.PhotoPath" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Shirt.ID" />
+                        <input hidden asp-for="Shirt.Name" class="form-control" />
+                        <input hidden asp-for="Shirt.Color" class="form-control" />
+                        <input hidden asp-for="Shirt.Size" class="form-control" />
+                        <input hidden asp-for="Shirt.Description" class="form-control" />
+                        <input hidden asp-for="Shirt.Price" class="form-control" />
+                        <input hidden asp-for="Shirt.ListDate" class="form-control" />
+                        <input hidden asp-for="Shirt.Category" class="form-control" />
+                        <input type="submit" value="Add To Cart" class="btn btn-danger m-1" asp-route-id="shirt.ID">
+                    </form>-->
                     @if (User.Identity.IsAuthenticated)
                     {
                         if (User.IsInRole("Product Lister"))

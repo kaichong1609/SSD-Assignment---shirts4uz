@@ -22,7 +22,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             _context = context;
         }
 
-        public IList<Shirt> Shirt { get;set; }
+        public IList<Shirt> ShirtList { get;set; }
         [BindProperty(SupportsGet = true)]
 
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
@@ -30,7 +30,9 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         public SelectList Categories { get; set; }
         [BindProperty(SupportsGet = true)]
         public string ShirtCategory { get; set; }
-
+        [BindProperty]
+        public Shirt Shirt { get; set; }
+        
         public async Task OnGetAsync()
         {
             IQueryable<string> categoryQuery = from m in _context.Shirt
@@ -47,7 +49,38 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 shirts = shirts.Where(x => x.Category == ShirtCategory);
             }
             Categories = new SelectList(await categoryQuery.Distinct().ToListAsync());
-            Shirt = await shirts.ToListAsync();
+            ShirtList = await shirts.ToListAsync();
         }
+        /*public async Task<IActionResult> OnPostAsync()
+        {
+            CartItems.UserEmail = User.Identity.Name.ToString();
+            CartItems.ShirtID = Shirt.ID.ToString();
+            CartItems.price =Shirt.Price;
+            CartItems.ShirtName = Shirt.Name.ToString();
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            _context.CartItems.Add(CartItems);
+            // Once a record is added, create an audit record
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                // Create an auditrecord object
+                TempData["message"] = "Added to Cart";
+                var auditrecord = new AuditRecord();
+                auditrecord.AuditActionType = "New Cart Item Record";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyShirtFieldID = CartItems.ID.ToString();
+                // Get current logged-in user
+                var userID = User.Identity.Name.ToString();
+                auditrecord.Username = userID;
+                _context.AuditRecords.Add(auditrecord);
+                await _context.SaveChangesAsync();
+            }
+
+            _context.CartItems.Add(CartItems);
+
+            return RedirectToPage("./Index");
+        }*/
     }
 }
