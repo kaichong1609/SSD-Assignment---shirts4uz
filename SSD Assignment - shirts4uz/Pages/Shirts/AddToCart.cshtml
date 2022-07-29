@@ -1,14 +1,13 @@
 ﻿@page "{id:int}"
-@model SSD_Assignment___shirts4uz.Pages.Shirts.DeleteModel
+@model SSD_Assignment___shirts4uz.Pages.Shirts.AddToCartModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Add To Cart";
     var photoPath = "~/img/" + (Model.Shirt.PhotoPath ?? "noimg.jpg");
 }
 
-<h1>Delete</h1>
+<h1>Add to Cart?</h1>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Shirt</h4>
     <hr />
@@ -68,10 +67,35 @@
         </dd>
 
     </dl>
-
-    <form method="post">
-        <input type="hidden" asp-for="Shirt.ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="container">
+            <form method="post">
+                <div class="row">
+                    <div class="col-sm-8 form-group">
+                        <h3>Select Quantity</h3>
+                        <label asp-for="Cart.Quantity" class="control-label">Quantity</label>
+                        <input asp-for="Cart.Quantity" class="form-control">
+                        <span asp-validation-for="Cart.Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+                <input hidden asp-for="Shirt.PhotoPath" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Shirt.ID" />
+                <input hidden asp-for="Shirt.Name" class="form-control" />
+                <input hidden asp-for="Shirt.Color" class="form-control" />
+                <input hidden asp-for="Shirt.Size" class="form-control" />
+                <input hidden asp-for="Shirt.Description" class="form-control" />
+                <input hidden asp-for="Shirt.Price" class="form-control" />
+                <input hidden asp-for="Shirt.ListDate" class="form-control" />
+                <input hidden asp-for="Shirt.Category" class="form-control" />
+                <input hidden asp-for="Shirt.ListedBy" class="form-control" />
+                <input type="submit" value="Submit" class="btn btn-danger m-1">
+            </form>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
 </div>

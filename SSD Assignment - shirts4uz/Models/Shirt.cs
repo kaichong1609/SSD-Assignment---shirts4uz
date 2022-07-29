@@ -35,5 +35,7 @@ namespace SSD_Assignment___shirts4uz.Models
         [RegularExpression(@"^[A-Z]+[a-zA-Z 0-9\s\,\-\/]*$", ErrorMessage = "Please enter valid string."), ]
         public string Category { get; set; }
         public string PhotoPath { get; set; }
+
+        public string ListedBy { get; set; }
     }
 }

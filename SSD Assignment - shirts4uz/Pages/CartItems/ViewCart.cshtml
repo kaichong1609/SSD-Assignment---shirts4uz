@@ -1,0 +1,134 @@
+﻿@page
+@model SSD_Assignment___shirts4uz.Pages.CartItems.ViewCartModel
+
+@{
+    ViewData["Title"] = "Cart Items";
+}
+
+<h1>Cart Items</h1>
+@if (TempData["msg"] != null)
+{
+    <p><font color="red">@TempData["msg"]</font></p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CartList[0].ShirtName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartList[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CartList[0].TtlPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ decimal ttl = 0;}
+        @foreach (var item in Model.CartList)
+        {
+            if (User.Identity.Name.ToString() == item.UserEmail)
+            {
+                ttl += item.TtlPrice;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShirtName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TtlPrice)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+
+            }
+        }
+        <tr>
+            <td>
+                @if (ttl > 0)
+                {
+                <p>Total Cost: $@ttl</p>
+                }
+                @if(ttl == 0) 
+                { 
+                <p>No Items</p>
+                }
+                
+            </td>
+        </tr>
+    </tbody>
+</table>
+@if (ttl > 0)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="container">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-sm-6 form-group">
+                            <h3>Billing Address</h3>
+                            <br />
+                            <label asp-for="Delivery.Address" class="control-label">Address</label>
+                            <input asp-for="Delivery.Address" class="form-control" placeholder="Hougang Ave 8, Block 532 #10-3213">
+                            <span asp-validation-for="Delivery.Address" class="text-danger"></span>
+
+                            <br />
+                            <label asp-for="Delivery.City" class="control-label">City</label>
+                            <input asp-for="Delivery.City" class="form-control" placeholder="Singapore">
+                            <span asp-validation-for="Delivery.City" class="text-danger"></span>
+                            <br />
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label asp-for="Delivery.State" class="control-label">State</label>
+                                    <input asp-for="Delivery.State" class="form-control" placeholder="Singapore">
+                                    <span asp-validation-for="Delivery.State" class="text-danger"></span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label asp-for="Delivery.PostalCode" class="control-label">Zip</label>
+                                    <input asp-for="Delivery.PostalCode" class="form-control" placeholder="540573">
+                                    <span asp-validation-for="Delivery.PostalCode" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <h3>Payment</h3>
+                            <br />
+                            <label for="name" class="control-label">Name on Card</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="John Tan">
+                            <br />
+                            <label for="ccnum" class="control-label">Credit Card Number</label>
+                            <input type="number" id="ccnum" name="ccnum" class="form-control" min="1000000000000000" max="9999999999999999" placeholder="1234123412341234">
+                            <br />
+                            <label for="ExpMonth" class="control-label">Exp Month</label>
+                            <input type="number" id="ExpMonth" name="ExpMonth" class="form-control" min="1" max="12" placeholder="12">
+                            <br />
+                            <div class="row form-group">
+                                <div class="col-sm-6">
+                                    <label for="ExpYear" class="control-label">Exp Year</label>
+                                    <input type="number" id="ExpYear" name="ExpYear" class="form-control" min="2022" max="3000" placeholder="2028">
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="cvv" class="control-label">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="359" class="form-control" minlength="3" maxlength="3" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" value="Confirm Purchase" class="btn btn-danger m-1">
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

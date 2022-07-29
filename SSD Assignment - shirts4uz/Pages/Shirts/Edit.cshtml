@@ -59,17 +59,10 @@
             <div class="form-group row col-sm-4 offset-4">
                 <img class="imageThumbnail" src="@photoPath" asp-append-version="true" style="max-width:30rem;" />
             </div>
-
-            <!--
-    <div class="form-group">
-        <label asp-for="Shirt.Review" class="control-label"></label>
-        <input asp-for="Shirt.Review" class="form-control" />
-        <span asp-validation-for="Shirt.Review" class="text-danger"></span>
-    </div>-->
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-
+            <input hidden asp-for="Shirt.ListedBy" class="form-control" />
         </form>
     </div>
 </div>

@@ -11,9 +11,9 @@ using SSD_Assignment___shirts4uz.Models;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
+namespace SSD_Assignment___shirts4uz.Pages.Deliveries
 {
-    [Authorize(Roles = "Product Lister")]
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
@@ -24,7 +24,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
         }
 
         [BindProperty]
-        public Feedback Feedback { get; set; }
+        public Delivery Delivery { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -33,9 +33,9 @@ namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
                 return NotFound();
             }
 
-            Feedback = await _context.Feedback.FirstOrDefaultAsync(m => m.ID == id);
+            Delivery = await _context.Delivery.FirstOrDefaultAsync(m => m.ID == id);
 
-            if (Feedback == null)
+            if (Delivery == null)
             {
                 return NotFound();
             }
@@ -51,16 +51,16 @@ namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
                 return Page();
             }
 
-            _context.Attach(Feedback).State = EntityState.Modified;
+            _context.Attach(Delivery).State = EntityState.Modified;
 
             try
             {
                 if (await _context.SaveChangesAsync() > 0)
                 {
                     var auditrecord = new AuditRecord();
-                    auditrecord.AuditActionType = "Feedback Details Updated";
+                    auditrecord.AuditActionType = "Delivery Details Updated";
                     auditrecord.DateTimeStamp = DateTime.Now;
-                    auditrecord.KeyShirtFieldID = Feedback.ID.ToString();
+                    auditrecord.KeyShirtFieldID = Delivery.ID.ToString();
                     var userID = User.Identity.Name.ToString();
                     auditrecord.Username = userID;
                     _context.AuditRecords.Add(auditrecord);
@@ -70,7 +70,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FeedbackExists(Feedback.ID))
+                if (!DeliveryExists(Delivery.ID))
                 {
                     return NotFound();
                 }
@@ -80,12 +80,12 @@ namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
                 }
             }
 
-            return RedirectToPage("../Shirts/Index");
+            return RedirectToPage("./Index");
         }
 
-        private bool FeedbackExists(int id)
+        private bool DeliveryExists(int id)
         {
-            return _context.Feedback.Any(e => e.ID == id);
+            return _context.Delivery.Any(e => e.ID == id);
         }
     }
 }

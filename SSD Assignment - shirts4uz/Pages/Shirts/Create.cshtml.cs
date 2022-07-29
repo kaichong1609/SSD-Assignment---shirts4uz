@@ -14,7 +14,7 @@ using SSD_Assignment___shirts4uz.Models;
 
 namespace SSD_Assignment___shirts4uz.Pages.Shirts
 {
-    [Authorize(Roles = "Product Lister")]
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
@@ -43,12 +43,13 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             var emptyShirt = new Shirt();
             if (await TryUpdateModelAsync<Shirt>(emptyShirt, "shirt", s => s.Name, s => s.Color, 
                 s => s.Size, s => s.Description, s => s.Price
-                , s => s.ListDate, s => s.Category, s => s.PhotoPath))
+                , s => s.ListDate, s => s.Category, s => s.PhotoPath, s => s.ListedBy))
             {
                 if (!ModelState.IsValid)
                 {
                     return Page();
                 }
+                Shirt.ListedBy = User.Identity.Name.ToString();
                 _context.Shirt.Add(Shirt);
                 //await _context.SaveChangesAsync();
                 // Once a record is added, create an audit record
