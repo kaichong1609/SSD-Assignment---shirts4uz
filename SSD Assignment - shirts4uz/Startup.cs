@@ -82,7 +82,7 @@ namespace SSD_Assignment___shirts4uz
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -100,6 +100,7 @@ namespace SSD_Assignment___shirts4uz
             app.UseRouting();
 
             app.UseAuthentication();
+            InitialiseUsers.SeedData(userManager, roleManager);
 
             app.UseAuthorization();
 

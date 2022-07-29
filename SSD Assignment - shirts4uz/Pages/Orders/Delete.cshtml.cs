@@ -53,6 +53,17 @@ namespace SSD_Assignment___shirts4uz.Pages.Orders
             if (Order != null)
             {
                 _context.Order.Remove(Order);
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Order cancelled";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeyShirtFieldID = Order.ID.ToString();
+                    var userID = User.Identity.Name.ToString();
+                    auditrecord.Username = userID;
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
+                }
                 await _context.SaveChangesAsync();
             }
 

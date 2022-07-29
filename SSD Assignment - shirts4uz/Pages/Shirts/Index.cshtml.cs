@@ -51,36 +51,5 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
             Categories = new SelectList(await categoryQuery.Distinct().ToListAsync());
             ShirtList = await shirts.ToListAsync();
         }
-        /*public async Task<IActionResult> OnPostAsync()
-        {
-            CartItems.UserEmail = User.Identity.Name.ToString();
-            CartItems.ShirtID = Shirt.ID.ToString();
-            CartItems.price =Shirt.Price;
-            CartItems.ShirtName = Shirt.Name.ToString();
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            _context.CartItems.Add(CartItems);
-            // Once a record is added, create an audit record
-            if (await _context.SaveChangesAsync() > 0)
-            {
-                // Create an auditrecord object
-                TempData["message"] = "Added to Cart";
-                var auditrecord = new AuditRecord();
-                auditrecord.AuditActionType = "New Cart Item Record";
-                auditrecord.DateTimeStamp = DateTime.Now;
-                auditrecord.KeyShirtFieldID = CartItems.ID.ToString();
-                // Get current logged-in user
-                var userID = User.Identity.Name.ToString();
-                auditrecord.Username = userID;
-                _context.AuditRecords.Add(auditrecord);
-                await _context.SaveChangesAsync();
-            }
-
-            _context.CartItems.Add(CartItems);
-
-            return RedirectToPage("./Index");
-        }*/
     }
 }

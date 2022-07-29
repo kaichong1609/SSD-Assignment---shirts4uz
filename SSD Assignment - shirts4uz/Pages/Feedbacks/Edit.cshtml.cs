@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
 {
-    [Authorize]
+    [Authorize(Roles = "Product Lister")]
     public class EditModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
@@ -55,6 +55,17 @@ namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
 
             try
             {
+                if (await _context.SaveChangesAsync() > 0)
+                {
+                    var auditrecord = new AuditRecord();
+                    auditrecord.AuditActionType = "Feedback Details Updated";
+                    auditrecord.DateTimeStamp = DateTime.Now;
+                    auditrecord.KeyShirtFieldID = Feedback.ID.ToString();
+                    var userID = User.Identity.Name.ToString();
+                    auditrecord.Username = userID;
+                    _context.AuditRecords.Add(auditrecord);
+                    await _context.SaveChangesAsync();
+                }
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
