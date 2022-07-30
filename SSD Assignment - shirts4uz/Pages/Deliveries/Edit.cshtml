@@ -3,50 +3,58 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<h2>Update Order Details</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Delivery.ShirtName" class="control-label"></label>
-                <input asp-for="Delivery.ShirtName" class="form-control" readonly />
-            </div>
-            <div class="form-group">
-                <label asp-for="Delivery.Address" class="control-label"></label>
-                <input asp-for="Delivery.Address" class="form-control" />
-                <span asp-validation-for="Delivery.Address" class="textdanger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Delivery.State" class="control-label"></label>
-                <input asp-for="Delivery.State" class="form-control" />
-                <span asp-validation-for="Delivery.State" class="textdanger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Delivery.City" class="control-label"></label>
-                <input asp-for="Delivery.City" class="form-control" />
-                <span asp-validation-for="Delivery.City" class="textdanger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Delivery.PostalCode" class="control-label"></label>
-                <input asp-for="Delivery.PostalCode" class="form-control" />
-                <span asp-validation-for="Delivery.PostalCode" class="textdanger"></span>
-            </div>
-            <input type="hidden" asp-for="Delivery.ID" />
-            <input type="hidden" asp-for="Delivery.Price" />
-            <input type="hidden" asp-for="Delivery.UserEmail" />
 
-
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
-</div>
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@if (Model.Delivery.UserEmail != User.Identity.Name.ToString() && !User.IsInRole("Product Lister"))
+{
+    <h1>Item does not exist</h1>
 }
+@if (Model.Delivery.UserEmail == User.Identity.Name.ToString() || User.IsInRole("Product Lister"))
+{
+    <h2>Update Order Details</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Delivery.ShirtName" class="control-label"></label>
+                    <input asp-for="Delivery.ShirtName" class="form-control" readonly />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Delivery.Address" class="control-label"></label>
+                    <input asp-for="Delivery.Address" class="form-control" />
+                    <span asp-validation-for="Delivery.Address" class="textdanger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Delivery.State" class="control-label"></label>
+                    <input asp-for="Delivery.State" class="form-control" />
+                    <span asp-validation-for="Delivery.State" class="textdanger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Delivery.City" class="control-label"></label>
+                    <input asp-for="Delivery.City" class="form-control" />
+                    <span asp-validation-for="Delivery.City" class="textdanger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Delivery.PostalCode" class="control-label"></label>
+                    <input asp-for="Delivery.PostalCode" class="form-control" />
+                    <span asp-validation-for="Delivery.PostalCode" class="textdanger"></span>
+                </div>
+                <input type="hidden" asp-for="Delivery.ID" />
+                <input type="hidden" asp-for="Delivery.Price" />
+                <input type="hidden" asp-for="Delivery.UserEmail" />
+
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

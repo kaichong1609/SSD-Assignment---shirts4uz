@@ -9,12 +9,12 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    //if (User.IsInRole("Product Lister"))
-    //{
+    if (User.IsInRole("Product Lister"))
+    {
     <p>
         <a asp-page="Create">Create New</a>
     </p>
-    //}
+    }
 }
 
 @if (TempData["message"] != null)
@@ -54,7 +54,7 @@
                     <a class="btn btn-primary m-1" asp-page="./Details" asp-route-id="@shirt.ID">Details</a>   
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.IsInRole("Product Lister") || User.Identity.Name.ToString() == shirt.ListedBy)
+                        if (User.IsInRole("Product Lister"))
                         {
                             <a class="btn btn-primary m-1" asp-page="./Edit" asp-route-id="@shirt.ID">Edit</a>
                             <a class="btn btn-danger m-1" asp-page="./Delete" asp-route-id="@shirt.ID">Delete</a>

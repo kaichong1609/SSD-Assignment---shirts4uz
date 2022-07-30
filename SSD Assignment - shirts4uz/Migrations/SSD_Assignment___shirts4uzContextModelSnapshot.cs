@@ -435,9 +435,6 @@ namespace SSD_Assignment___shirts4uz.Migrations
                     b.Property<DateTime>("ListDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ListedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(60)")

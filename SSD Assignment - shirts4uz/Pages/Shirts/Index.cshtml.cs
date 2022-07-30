@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using SSD_Assignment___shirts4uz.Data;
 using SSD_Assignment___shirts4uz.Models;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +14,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SSD_Assignment___shirts4uz.Pages.Shirts
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;

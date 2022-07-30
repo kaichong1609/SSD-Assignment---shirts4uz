@@ -34,11 +34,15 @@ namespace SSD_Assignment___shirts4uz.Pages.CartItems
             }
 
             Cart = await _context.Cart.FirstOrDefaultAsync(m => m.ID == id);
-            Cart.TtlPrice = Cart.TtlPrice / Cart.Quantity;
+            
 
             if (Cart == null)
             {
                 return NotFound();
+            }
+            if (Cart.UserEmail == User.Identity.Name)
+            {
+                Cart.TtlPrice = Cart.TtlPrice / Cart.Quantity;
             }
             return Page();
         }

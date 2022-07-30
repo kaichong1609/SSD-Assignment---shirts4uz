@@ -31,18 +31,25 @@ namespace SSD_Assignment___shirts4uz.Pages.Deliveries
 
         public async Task OnGetAsync()
         {
-            CurrentUser = User.Identity.Name.ToString();
-            IQueryable<string> userQuery = from m in _context.Delivery
+            if(!User.IsInRole("Product Lister"))
+            {
+                CurrentUser = User.Identity.Name.ToString();
+                IQueryable<string> userQuery = from m in _context.Delivery
                                                orderby m.UserEmail
                                                select m.UserEmail;
-            var delivery = from m in _context.Delivery
-                         select m;
-            if (!string.IsNullOrEmpty(CurrentUser))
-            {
-                delivery = delivery.Where(x => x.UserEmail == CurrentUser);
+                var delivery = from m in _context.Delivery
+                               select m;
+                if (!string.IsNullOrEmpty(CurrentUser))
+                {
+                    delivery = delivery.Where(x => x.UserEmail == CurrentUser);
+                }
+                AllDeliveries = new SelectList(await userQuery.Distinct().ToListAsync());
+                Deliveries = await delivery.ToListAsync();
             }
-            AllDeliveries = new SelectList(await userQuery.Distinct().ToListAsync());
-            Deliveries = await delivery.ToListAsync();
+            else
+            {
+                Deliveries = await _context.Delivery.ToListAsync();
+            }
         }
     }
 }

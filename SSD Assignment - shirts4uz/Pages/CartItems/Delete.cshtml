@@ -4,37 +4,44 @@
 @{
     ViewData["Title"] = "Delete";
 }
+@if (Model.Cart.UserEmail != User.Identity.Name.ToString())
+{
+    <h1>Item does not exist</h1>
+}
+@if (Model.Cart.UserEmail == User.Identity.Name.ToString())
+{
+    <h1>Remove Item</h1>
 
-<h1>Remove Item</h1>
+    <h3>Are you sure you want to remove this item?</h3>
+    <div>
+        <h4>Cart Item</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cart.ShirtName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cart.ShirtName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cart.TtlPrice)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cart.TtlPrice)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Cart.Quantity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cart.Quantity)
+            </dd>
+        </dl>
 
-<h3>Are you sure you want to remove this item?</h3>
-<div>
-    <h4>Cart Item</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cart.ShirtName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cart.ShirtName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cart.TtlPrice)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cart.TtlPrice)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Cart.Quantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Cart.Quantity)
-        </dd>
-    </dl>
+        <form method="post">
+            <input type="hidden" asp-for="Cart.ID" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-page="./ViewCart">Back to List</a>
+        </form>
+    </div>
+}
 
-    <form method="post">
-        <input type="hidden" asp-for="Cart.ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./ViewCart">Back to List</a>
-    </form>
-</div>

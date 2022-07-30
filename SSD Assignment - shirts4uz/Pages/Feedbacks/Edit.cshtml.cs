@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment___shirts4uz.Pages.Feedbacks
 {
-    [Authorize(Roles = "Product Lister")]
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;

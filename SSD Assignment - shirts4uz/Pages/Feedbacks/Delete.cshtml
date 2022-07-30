@@ -4,31 +4,38 @@
 @{
     ViewData["Title"] = "Delete";
 }
+@if (Model.Feedback.FullName != User.Identity.Name.ToString() && !User.IsInRole("Product Lister"))
+{
+    <h1>Item does not exist</h1>
+}
+@if (Model.Feedback.FullName == User.Identity.Name.ToString() || User.IsInRole("Product Lister"))
+{
 
-<h1>Delete Feedback</h1>
+    <h1>Delete Feedback</h1>
 
-<h3>Are you sure you want to delete your feedback?</h3>
-<div>
-    <h4>Feedback</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Feedback.Comment)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Feedback.Comment)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Feedback.Rating)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Feedback.Rating)
-        </dd>
-    </dl>
+    <h3>Are you sure you want to delete your feedback?</h3>
+    <div>
+        <h4>Feedback</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Feedback.Comment)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Feedback.Comment)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Feedback.Rating)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Feedback.Rating)
+            </dd>
+        </dl>
 
-    <form method="post">
-        <input type="hidden" asp-for="Feedback.ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="../Shirts/Index">Back to List</a>
-    </form>
-</div>
+        <form method="post">
+            <input type="hidden" asp-for="Feedback.ID" />
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-page="../Shirts/Index">Back to List</a>
+        </form>
+    </div>
+}

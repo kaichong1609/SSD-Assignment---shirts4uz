@@ -54,12 +54,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Shirt.Category)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Shirt.ListedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Shirt.ListedBy)
-        </dd>
         <dd class="col-sm-10">
             <div class="form-group row col-sm-4 offset-4">
                 <img class="imageThumbnail" src="@photoPath" asp-append-version="true" style="max-width:30rem;" />
@@ -90,7 +84,6 @@
                 <input hidden asp-for="Shirt.Price" class="form-control" />
                 <input hidden asp-for="Shirt.ListDate" class="form-control" />
                 <input hidden asp-for="Shirt.Category" class="form-control" />
-                <input hidden asp-for="Shirt.ListedBy" class="form-control" />
                 <input type="submit" value="Submit" class="btn btn-danger m-1">
             </form>
         </div>
