@@ -21,7 +21,7 @@ namespace SSD_Assignment___shirts4uz.Data
                 Models.ApplicationUser user = new Models.ApplicationUser();
                 user.UserName = "productmanager@gmail.com";
                 user.Email = "productmanager@gmail.com";
-                user.FullName = "productmanager@gmail.com"";
+                user.FullName = "productmanager@gmail.com";
                 user.BirthDate = new DateTime(1960, 1, 1);
 
                 IdentityResult result = userManager.CreateAsync
