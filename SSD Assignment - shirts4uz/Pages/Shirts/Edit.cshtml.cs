@@ -32,6 +32,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         public IFormFile Image { get; set; }
         [BindProperty]
         public Shirt Shirt { get; set; }
+        private string[] permittedExtensions = { ".jpg", ".png", ".webp" };
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -66,6 +67,12 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 if (Image != null)
                 {
                     var fileName = GenerateUniqueName(this.Image.FileName);
+                    var ext = Path.GetExtension(fileName).ToLowerInvariant();
+                    if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                    {
+                        TempData["message"] = "Error uploading image";
+                        return RedirectToPage("./Index");
+                    }
                     var uploadsPath = Path.Combine(_webHostEnvironment.WebRootPath, "img");
                     var filePath = Path.Combine(uploadsPath, fileName);
                     Image.CopyTo(new FileStream(filePath, FileMode.Create));

@@ -34,7 +34,8 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
         public IFormFile Photo { get; set; }
         private readonly IWebHostEnvironment webHostEnvironment;
         [BindProperty]
-        public Shirt Shirt { get; set; }    
+        public Shirt Shirt { get; set; }
+        private string[] permittedExtensions = { ".jpg", ".png", ".webp" };
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -48,6 +49,12 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 if (!ModelState.IsValid)
                 {
                     return Page();
+                }
+                var ext = Path.GetExtension(Shirt.PhotoPath).ToLowerInvariant();
+                if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                {
+                    TempData["message"] = "Error uploading image";
+                    return RedirectToPage("./Index");
                 }
                 _context.Shirt.Add(Shirt);
                 //await _context.SaveChangesAsync();
