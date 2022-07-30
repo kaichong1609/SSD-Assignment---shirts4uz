@@ -16,12 +16,12 @@ namespace SSD_Assignment___shirts4uz.Data
 
         public static void SeedUsers(UserManager<Models.ApplicationUser> userManager)
         {
-            if (userManager.FindByNameAsync("productlister@gmail.com").Result == null)
+            if (userManager.FindByNameAsync("productmanager@gmail.com").Result == null)
             {
                 Models.ApplicationUser user = new Models.ApplicationUser();
-                user.UserName = "productlister@gmail.com";
-                user.Email = "productlister@gmail.com";
-                user.FullName = "Product Lister";
+                user.UserName = "productmanager@gmail.com";
+                user.Email = "productmanager@gmail.com";
+                user.FullName = "productmanager@gmail.com"";
                 user.BirthDate = new DateTime(1960, 1, 1);
 
                 IdentityResult result = userManager.CreateAsync
@@ -29,7 +29,7 @@ namespace SSD_Assignment___shirts4uz.Data
 
                 if (result.Succeeded)
                 {
-                    userManager.AddToRoleAsync(user,"Product Lister").Wait();
+                    userManager.AddToRoleAsync(user,"Product Manager").Wait();
                 }
             }
 
@@ -71,11 +71,11 @@ namespace SSD_Assignment___shirts4uz.Data
 
         public static void SeedRoles(RoleManager<Models.ApplicationRole> roleManager)
         {
-            if (!roleManager.RoleExistsAsync("Product Lister").Result)
+            if (!roleManager.RoleExistsAsync("Product Manager").Result)
             {
                 Models.ApplicationRole role = new Models.ApplicationRole();
-                role.Name = "Product Lister";
-                role.Description = "Manages product listings.";
+                role.Name = "Product Manager";
+                role.Description = "Manages product specifics.";
                 IdentityResult roleResult = roleManager.
                 CreateAsync(role).Result;
             }

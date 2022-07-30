@@ -137,7 +137,7 @@
                     </td>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        if (User.IsInRole("Product Lister") || User.Identity.Name == item.FullName)
+                        if (User.IsInRole("Product Manager") || User.Identity.Name == item.FullName)
                         {
                             <td>
                                 <a asp-page="../Feedbacks/Edit" asp-route-id="@item.ID">Edit</a> |

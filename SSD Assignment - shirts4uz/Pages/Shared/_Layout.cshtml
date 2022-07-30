@@ -50,10 +50,13 @@
                                     <a class="nav-link text-dark" asp-area="" asp-page="/Audit/Index">View Audit Logs</a>
                                 </li>
                             }
-                            if (User.IsInRole("Product Lister"))
+                            if (User.IsInRole("Product Manager"))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-page="/Shirts/Create">Add a new shirt</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Deliveries/Index">View All Orders</a>
                                 </li>
                             }
                         }

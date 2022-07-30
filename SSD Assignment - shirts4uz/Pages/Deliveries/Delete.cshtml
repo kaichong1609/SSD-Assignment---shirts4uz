@@ -5,11 +5,11 @@
     ViewData["Title"] = "Delete";
 }
 
-@if (Model.Delivery.UserEmail != User.Identity.Name.ToString() && !User.IsInRole("Product Lister"))
+@if (Model.Delivery.UserEmail != User.Identity.Name.ToString() && !User.IsInRole("Product Manager"))
 {
     <h1>Item does not exist</h1>
 }
-@if (Model.Delivery.UserEmail == User.Identity.Name.ToString() || User.IsInRole("Product Lister"))
+@if (Model.Delivery.UserEmail == User.Identity.Name.ToString() || User.IsInRole("Product Manager"))
 {
     <h1>Cancel Order</h1>
 

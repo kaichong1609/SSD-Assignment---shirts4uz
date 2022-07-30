@@ -28,6 +28,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Deliveries[0].Price)
             </th>
+            @if (User.IsInRole("Product Manager"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Deliveries[0].UserEmail)
+                </th>
+            }
             <th></th>
         </tr>
     </thead>
@@ -53,6 +59,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
+            @if (User.IsInRole("Product Manager"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserEmail)
+                </td>
+            }
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>

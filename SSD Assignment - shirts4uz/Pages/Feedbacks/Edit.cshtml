@@ -3,11 +3,11 @@
 @{
     ViewData["Title"] = "Edit";
 }
-@if (Model.Feedback.FullName != User.Identity.Name.ToString() && !User.IsInRole("Product Lister"))
+@if (Model.Feedback.FullName != User.Identity.Name.ToString() && !User.IsInRole("Product Manager"))
 {
     <h1>Item does not exist</h1>
 }
-@if (Model.Feedback.FullName == User.Identity.Name.ToString() || User.IsInRole("Product Lister"))
+@if (Model.Feedback.FullName == User.Identity.Name.ToString() || User.IsInRole("Product Manager"))
 {
     <h2>Edit Feedback</h2>
     <hr />

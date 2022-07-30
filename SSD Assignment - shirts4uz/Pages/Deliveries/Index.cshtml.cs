@@ -31,7 +31,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Deliveries
 
         public async Task OnGetAsync()
         {
-            if(!User.IsInRole("Product Lister"))
+            if(!User.IsInRole("Product Manager"))
             {
                 CurrentUser = User.Identity.Name.ToString();
                 IQueryable<string> userQuery = from m in _context.Delivery

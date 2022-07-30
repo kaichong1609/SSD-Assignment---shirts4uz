@@ -35,6 +35,7 @@ namespace SSD_Assignment___shirts4uz.Models
 
         public string ShirtID { get; set; }
 
+        [Display(Name = "User Email")]
         public string UserEmail { get; set; }
 
     }
