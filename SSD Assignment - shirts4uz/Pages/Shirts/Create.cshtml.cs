@@ -53,7 +53,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
                 var ext = Path.GetExtension(Shirt.PhotoPath).ToLowerInvariant();
                 if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
                 {
-                    TempData["message"] = "Error uploading image";
+                    
                     return RedirectToPage("./Index");
                 }
                 _context.Shirt.Add(Shirt);
