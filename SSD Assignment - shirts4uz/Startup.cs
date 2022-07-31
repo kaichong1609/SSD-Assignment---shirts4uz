@@ -79,6 +79,12 @@ namespace SSD_Assignment___shirts4uz
             });
             services.AddAuthorization();
 
+
+            // Recaptcha
+            services.AddHttpClient<ReCaptcha>(x =>
+            {
+                x.BaseAddress = new Uri("https://www.google.com/recaptcha/api/siteverify");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

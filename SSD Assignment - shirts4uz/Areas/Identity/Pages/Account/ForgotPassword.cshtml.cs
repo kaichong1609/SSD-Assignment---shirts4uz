@@ -19,11 +19,13 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly ReCaptcha _captcha;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ReCaptcha captcha)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _captcha = captcha;
         }
 
         [BindProperty]
@@ -40,6 +42,10 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
         {
             if (ModelState.IsValid)
             {
+                if (!Request.Form.ContainsKey("g-recaptcha-response")) return Page();
+                var captcha = Request.Form["g-recaptcha-response"].ToString();
+                if (!await _captcha.IsValid(captcha)) return Page();
+
                 var user = await _userManager.FindByEmailAsync(Input.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
@@ -61,6 +67,8 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
                     Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
