@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
 using SSD_Assignment___shirts4uz.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace SSD_Assignment___shirts4uz.Pages.Roles
 {
+    [Authorize(Roles = "Administrator")]
     public class DetailsModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
