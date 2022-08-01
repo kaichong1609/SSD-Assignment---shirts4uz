@@ -42,9 +42,9 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
         {
             if (ModelState.IsValid)
             {
-                if (!Request.Form.ContainsKey("g-recaptcha-response")) return Page();
+                if (!Request.Form.ContainsKey("g-recaptcha-response")) return RedirectToPage("./ForgotPasswordConfirmation");
                 var captcha = Request.Form["g-recaptcha-response"].ToString();
-                if (!await _captcha.IsValid(captcha)) return Page();
+                if (!await _captcha.IsValid(captcha)) return RedirectToPage("./ForgotPasswordConfirmation");
 
                 var user = await _userManager.FindByEmailAsync(Input.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
