@@ -24,17 +24,20 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ReCaptcha _captcha;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ReCaptcha captcha)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _captcha = captcha;
         }
 
         [BindProperty]
@@ -68,6 +71,8 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
             public string FullName { get; set; }
         }
 
+
+
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
@@ -76,19 +81,33 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            
+
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
+
+                if (!Request.Form.ContainsKey("g-recaptcha-response")) return Page();
+                var captcha = Request.Form["g-recaptcha-response"].ToString();
+                if (!await _captcha.IsValid(captcha)) return Page();
+
+
                 var user = new ApplicationUser
                 {
                     UserName = Input.Email,
                     Email = Input.Email,
                     FullName = Input.FullName
                 };
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+
                 if (result.Succeeded)
                 {
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -101,6 +120,8 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -116,6 +137,10 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+
+                return RedirectToPage("./Login");
+
+
             }
 
             // If we got this far, something failed, redisplay form

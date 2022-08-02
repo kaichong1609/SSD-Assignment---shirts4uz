@@ -21,7 +21,7 @@ namespace SSD_Assignment___shirts4uz
             try
             {
                 var postTask = await captchaClient
-                    .PostAsync($"?secret=SECRET_KEY&response={captcha}", new StringContent(""));
+                    .PostAsync($"?secret=6Lc6njchAAAAAGTaNrst-1klEo7c_0UNFGbeu0i0&response={captcha}", new StringContent(""));
                 var result = await postTask.Content.ReadAsStringAsync();
                 var resultObject = JObject.Parse(result);
                 dynamic success = resultObject["success"];

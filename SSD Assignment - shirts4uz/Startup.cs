@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using SSD_Assignment___shirts4uz.Models;
 using SSD_Assignment___shirts4uz.Data;
+using AspNetCore.ReCaptcha;
 
 namespace SSD_Assignment___shirts4uz
 {
@@ -85,6 +86,8 @@ namespace SSD_Assignment___shirts4uz
             {
                 x.BaseAddress = new Uri("https://www.google.com/recaptcha/api/siteverify");
             });
+
+            services.AddReCaptcha(Configuration.GetSection("ReCaptcha"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

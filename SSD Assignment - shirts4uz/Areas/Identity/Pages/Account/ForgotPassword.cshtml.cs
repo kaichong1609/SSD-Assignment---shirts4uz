@@ -19,13 +19,11 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
-        private readonly ReCaptcha _captcha;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender, ReCaptcha captcha)
+        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
-            _captcha = captcha;
         }
 
         [BindProperty]
@@ -40,11 +38,12 @@ namespace SSD_Assignment___shirts4uz.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
+            
+
+
             if (ModelState.IsValid)
             {
-                if (!Request.Form.ContainsKey("g-recaptcha-response")) return RedirectToPage("./ForgotPasswordConfirmation");
-                var captcha = Request.Form["g-recaptcha-response"].ToString();
-                if (!await _captcha.IsValid(captcha)) return RedirectToPage("./ForgotPasswordConfirmation");
+                
 
                 var user = await _userManager.FindByEmailAsync(Input.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
