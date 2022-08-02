@@ -5,11 +5,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<h1>Audit Logs</h1>
+<br/>
+<form>
+    <p>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<br/>
 <table class="table">
     <thead>
         <tr>
@@ -29,24 +33,19 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.AuditRecord) {
+@foreach (var audit in Model.AuditList) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AuditActionType)
+                @Html.DisplayFor(modelItem => audit.AuditActionType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => audit.Username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateTimeStamp)
+                @Html.DisplayFor(modelItem => audit.DateTimeStamp)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.KeyShirtFieldID)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Audit_ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Audit_ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Audit_ID">Delete</a>
+                @Html.DisplayFor(modelItem => audit.KeyShirtFieldID)
             </td>
         </tr>
 }

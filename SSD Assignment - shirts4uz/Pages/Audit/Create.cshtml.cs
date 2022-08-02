@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment___shirts4uz.Pages.Audit
 {
-    [Authorize(Roles = "Auditor")]
+    [Authorize(Roles = "no role can edit an audit")]
     public class CreateModel : PageModel
     {
         private readonly SSD_Assignment___shirts4uz.Data.SSD_Assignment___shirts4uzContext _context;
