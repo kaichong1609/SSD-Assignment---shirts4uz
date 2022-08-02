@@ -21,6 +21,9 @@ namespace SSD_Assignment___shirts4uz.Pages.Audit
         [BindProperty(SupportsGet = true)]
         [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
         public string SearchString { get; set; }
+        [BindProperty(SupportsGet = true)]
+        [RegularExpression("^[a-zA-Z ]*$", ErrorMessage = "Please enter valid string.")]
+        public string SearchUser { get; set; }
         public SelectList ActionType { get; set; }
         [BindProperty(SupportsGet = true)]
         public string AuditActionType { get; set; }
@@ -44,9 +47,9 @@ namespace SSD_Assignment___shirts4uz.Pages.Audit
             {
                 audits = audits.Where(s => s.AuditActionType.Contains(SearchString));
             }
-            if (!string.IsNullOrEmpty(AuditActionType))
+            if (!string.IsNullOrEmpty(SearchUser))
             {
-                audits = audits.Where(x => x.AuditActionType == AuditActionType);
+                audits = audits.Where(s => s.Username.Contains(SearchUser));
             }
             ActionType = new SelectList(await actionQuery.Distinct().ToListAsync());
             AuditList = await audits.ToListAsync();
