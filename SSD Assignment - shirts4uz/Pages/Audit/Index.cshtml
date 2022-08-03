@@ -51,6 +51,9 @@
             <td>
                 @Html.DisplayFor(modelItem => audit.KeyShirtFieldID)
             </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@audit.Audit_ID">Details</a>
+            </td>
         </tr>
 }
     </tbody>
