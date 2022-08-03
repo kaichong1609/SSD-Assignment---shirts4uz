@@ -27,6 +27,7 @@ namespace SSD_Assignment___shirts4uz.Pages.Shirts
 
         public IActionResult OnGet()
         {
+            //throw new Exception("Test Error");
             return Page();
         }
 
