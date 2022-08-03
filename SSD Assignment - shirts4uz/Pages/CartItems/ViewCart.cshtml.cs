@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SSD_Assignment___shirts4uz.Data;
 using SSD_Assignment___shirts4uz.Models;
 using Microsoft.AspNetCore.Authorization;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace SSD_Assignment___shirts4uz.Pages.CartItems
 {
@@ -28,6 +28,18 @@ namespace SSD_Assignment___shirts4uz.Pages.CartItems
         [BindProperty]
         public Cart Cart { get; set; }
 
+        [StringLength(300, MinimumLength = 1, ErrorMessage = "Please enter valid string."), Required]
+        [RegularExpression(@"^[A-Za-z]*$", ErrorMessage = "Please enter valid string.")]
+        public string NameonCard { get; set; }
+        [StringLength(300, MinimumLength = 13, ErrorMessage = "Please enter valid string."), Required]
+        public string CCNum { get; set; }
+
+        [Range(1, 12, ErrorMessage = "Please enter valid number."), RegularExpression(@"\d{1,2}]*", ErrorMessage = "Please enter valid number."), Required]
+        public int ExpMonth { get; set; }
+        [Range(2022, 3000, ErrorMessage = "Please enter valid year"), RegularExpression(@"\d{4}]*", ErrorMessage = "Please enter valid year."), Required]
+        public int ExpYear { get; set; }
+        [Range(100, 999, ErrorMessage = "Please enter a valid CVV"), RegularExpression(@"\d{3}]*", ErrorMessage = "Please enter a valid CVV."), Required]
+        public int CVV { get; set; }
         public async Task OnGetAsync()
         {
             CartList = await _context.Cart.ToListAsync();

@@ -101,23 +101,38 @@
                         <div class="col-sm-6 form-group">
                             <h3>Payment</h3>
                             <br />
-                            <label for="name" class="control-label">Name on Card</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="John Tan">
+                            <!--<label for="name" class="control-label">Name on Card</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="John Tan" pattern="[A-Za-z]">-->
+                            <label asp-for="NameonCard" class="control-label">Name on Card</label>
+                            <input asp-for="NameonCard" class="form-control" placeholder="John Tan">
+                            <span asp-validation-for="NameonCard" class="text-danger"></span>
                             <br />
-                            <label for="ccnum" class="control-label">Credit Card Number</label>
-                            <input type="number" id="ccnum" name="ccnum" class="form-control" min="1000000000000000" max="9999999999999999" placeholder="1234123412341234">
+                            <!--<label for="ccnum" class="control-label">Credit Card Number</label>
+                            <input type="number" id="ccnum" name="ccnum" class="form-control" min="1000000000000000" max="9999999999999999" placeholder="1234123412341234">-->
+                            <label asp-for="CCNum" class="control-label">Credit Card Number</label>
+                            <input asp-for="CCNum" class="form-control" placeholder="1234123412341234">
+                            <span asp-validation-for="CCNum" class="text-danger"></span>
                             <br />
-                            <label for="ExpMonth" class="control-label">Exp Month</label>
-                            <input type="number" id="ExpMonth" name="ExpMonth" class="form-control" min="1" max="12" placeholder="12">
+                            <!--<label for="ExpMonth" class="control-label">Exp Month</label>
+                            <input type="number" id="ExpMonth" name="ExpMonth" class="form-control" min="1" max="12" placeholder="12">-->
+                            <label asp-for="ExpMonth" class="control-label">Exp Month</label>
+                            <input asp-for="ExpMonth" class="form-control" placeholder="12">
+                            <span asp-validation-for="ExpMonth" class="text-danger"></span>
                             <br />
                             <div class="row form-group">
                                 <div class="col-sm-6">
-                                    <label for="ExpYear" class="control-label">Exp Year</label>
-                                    <input type="number" id="ExpYear" name="ExpYear" class="form-control" min="2022" max="3000" placeholder="2028">
+                                    <!--<label for="ExpYear" class="control-label">Exp Year</label>
+                                    <input type="number" id="ExpYear" name="ExpYear" class="form-control" min="2022" max="3000" placeholder="2028">-->
+                                    <label asp-for="ExpYear" class="control-label">Exp Year</label>
+                                    <input asp-for="ExpYear" class="form-control" placeholder="2028">
+                                    <span asp-validation-for="ExpYear" class="text-danger"></span>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="cvv" class="control-label">CVV</label>
-                                    <input type="text" id="cvv" name="cvv" placeholder="359" class="form-control" minlength="3" maxlength="3" required>
+                                    <!--<label for="cvv" class="control-label">CVV</label>
+                                    <input type="number" id="cvv" name="cvv" placeholder="359" class="form-control" min="100" max="999" required>-->
+                                    <label asp-for="CVV" class="control-label">CVV</label>
+                                    <input asp-for="CVV" class="form-control" placeholder="359">
+                                    <span asp-validation-for="CVV" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
